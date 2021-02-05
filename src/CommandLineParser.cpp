@@ -910,7 +910,7 @@ void CommandLineParser::parse_options(int argc, char** argv, Options &opts)
         break;
 
       case 57: /* branch length optimization radius */
-        if(sscanf(optarg, "%u", &opts.brlen_opt_radius) != 1 || opts.brlen_opt_radius == 0)
+        if(sscanf(optarg, "%u", &opts.brlen_opt_radius) != 1 || opts.brlen_opt_radius <= 0)
         {
           throw InvalidOptionValueException("Invalid branch length optimization radius: " +
                                             string(optarg) +
