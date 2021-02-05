@@ -15,6 +15,9 @@ struct spr_round_params
   int ntopol_keep;
   double subtree_cutoff;
   cutoff_info_t cutoff_info;
+  
+  int brlen_opt_radius;
+  float spr_lheps;
 
   void reset_cutoff_info(double loglh)
   {

@@ -3,7 +3,8 @@
 using namespace std;
 
 Optimizer::Optimizer (const Options &opts) :
-    _lh_epsilon(opts.lh_epsilon), _spr_radius(opts.spr_radius), _spr_cutoff(opts.spr_cutoff)
+    _lh_epsilon(opts.lh_epsilon), _spr_radius(opts.spr_radius), _spr_cutoff(opts.spr_cutoff),
+    _brlen_opt_radius(opts.brlen_opt_radius), _spr_lheps(opts.spr_lheps)
 {
 }
 
@@ -53,6 +54,9 @@ double Optimizer::optimize_topology(TreeInfo& treeinfo, CheckpointManager& cm)
   int& iter = search_state.iteration;
   spr_round_params& spr_params = search_state.spr_params;
   int& best_fast_radius = search_state.fast_spr_radius;
+  
+  spr_params.spr_lheps = _spr_lheps;
+  spr_params.brlen_opt_radius = _brlen_opt_radius;
 
   CheckpointStep resume_step = search_state.step;
 

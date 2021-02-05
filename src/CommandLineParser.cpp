@@ -79,6 +79,10 @@ static struct option long_options[] =
   {"sitelh",             no_argument, 0, 0 },        /*  55 */
   {"site-weights",       required_argument, 0, 0 },  /*  56 */
 
+  // Extended CLI-settable numerical parameters
+  {"brlen-opt-radius",   required_argument, 0, 0},   /*  57 */
+  {"spr-lheps",          required_argument, 0, 0},   /*  58 */
+
   { 0, 0, 0, 0 }
 };
 
@@ -271,6 +275,8 @@ void CommandLineParser::parse_options(int argc, char** argv, Options &opts)
 
   /* initialize LH epsilon with default value */
   opts.lh_epsilon = DEF_LH_EPSILON;
+  opts.spr_lheps = DEF_SPR_LH_EPSILON;
+  opts.brlen_opt_radius = DEF_BRLEN_OPT_RADIUS;
 
   /* default: autodetect best SPR radius */
   opts.spr_radius = -1;
@@ -903,7 +909,23 @@ void CommandLineParser::parse_options(int argc, char** argv, Options &opts)
         opts.weights_file = optarg;
         break;
 
+      case 57: /* branch length optimization radius */
+        if(sscanf(optarg, "%u", &opts.brlen_opt_radius) != 1 || opts.brlen_opt_radius == 0)
+        {
+          throw InvalidOptionValueException("Invalid branch length optimization radius: " +
+                                            string(optarg) +
+                                            ", please provide a positive integer number.");
+        }
+        break;
 
+      case 58: /* lheps for branch length optimization during spr rounds */
+        if(sscanf(optarg, "%lf", &opts.spr_lheps) != 1 || opts.spr_lheps <= 0)
+        {
+          throw InvalidOptionValueException("Invalid lh_eps during spr rounds radius: " +
+                                            string(optarg) +
+                                            ", please provide a positive real number.");
+        }
+        break;
       default:
         throw  OptionException("Internal error in option parsing");
     }

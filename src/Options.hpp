@@ -75,10 +75,12 @@ public:
   long random_seed;
   StartingTreeMap start_trees;
   double lh_epsilon;
+  double spr_lheps;
   int spr_radius;
   double spr_cutoff;
   int brlen_linkage;
   int brlen_opt_method;
+  unsigned int brlen_opt_radius;
   double brlen_min;
   double brlen_max;
 

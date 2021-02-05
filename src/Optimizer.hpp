@@ -19,6 +19,8 @@ private:
   double _lh_epsilon;
   int _spr_radius;
   double _spr_cutoff;
+  int _brlen_opt_radius;
+  double _spr_lheps;
 };
 
 #endif /* RAXML_OPTIMIZER_H_ */

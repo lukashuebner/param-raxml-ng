@@ -5,7 +5,7 @@
 #define RAXML_LOGLH_TOLERANCE     1e-12
 
 #define DEF_LH_EPSILON            0.1
-#define OPT_LH_EPSILON            0.1
+#define DEF_SPR_LH_EPSILON        0.1
 #define RAXML_PARAM_EPSILON       0.001  //0.01
 #define RAXML_BFGS_FACTOR         1e7
 
@@ -13,7 +13,6 @@
 #define RAXML_BRLEN_DEFAULT       0.1
 #define RAXML_BRLEN_MIN           1.0e-6
 #define RAXML_BRLEN_MAX           100.
-#define RAXML_BRLEN_TOLERANCE     1.0e-7
 
 #define RAXML_PINV_MIN            1.0e-9
 #define RAXML_PINV_MAX            0.99
@@ -25,6 +24,8 @@
 #define RAXML_BRLEN_SCALER_MAX    100.
 
 #define RAXML_RATESCALERS_TAXA    2000
+
+#define DEF_BRLEN_OPT_RADIUS      1
 
 #define RAXML_DEFAULT_PRECISION   6
 
