@@ -39,3 +39,9 @@ release/
 .cproject
 .project
 .settings/
+
+# clangd and VS Code
+.vscode
+.clangd
+compile_commands.json
+run
