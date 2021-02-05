@@ -6,7 +6,7 @@
 
 #define DEF_LH_EPSILON            0.1
 #define DEF_SPR_LH_EPSILON        0.1
-#define RAXML_PARAM_EPSILON       0.001  //0.01
+#define DEF_PARAM_EPSILON         0.001  //0.01
 #define RAXML_BFGS_FACTOR         1e7
 
 #define DEF_BRLEN_SMOOTHINGS      32

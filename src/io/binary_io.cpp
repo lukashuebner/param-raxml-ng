@@ -417,6 +417,8 @@ BasicBinaryStream& operator<<(BasicBinaryStream& stream, const Options& o)
   stream << o.use_repeats << o.use_rba_partload << o.use_energy_monitor;
   stream << o.optimize_model << o.optimize_brlen;
 
+  stream << o.spr_lheps << o.brlen_opt_radius << o.brlen_smoothings << o.param_epsilon;
+
   stream << o.force_mode << o.safety_checks.flags();
 
   stream << o.redo_mode << o.nofiles_mode << o.write_interim_results;
@@ -460,6 +462,8 @@ BasicBinaryStream& operator>>(BasicBinaryStream& stream, Options& o)
   stream >> o.use_tip_inner >> o.use_pattern_compression >> o.use_prob_msa >> o.use_rate_scalers;
   stream >> o.use_repeats >> o.use_rba_partload >> o.use_energy_monitor;
   stream >> o.optimize_model >> o.optimize_brlen;
+
+  stream >> o.spr_lheps >> o.brlen_opt_radius >> o.brlen_smoothings >> o.param_epsilon;
 
   stream >> o.force_mode >> o.safety_checks;
 

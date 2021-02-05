@@ -84,6 +84,7 @@ public:
   double brlen_min;
   double brlen_max;
   int brlen_smoothings;
+  double param_epsilon;
 
   unsigned int num_searches;
   unsigned long long terrace_maxsize;

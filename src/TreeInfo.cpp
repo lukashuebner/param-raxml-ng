@@ -29,6 +29,7 @@ void TreeInfo::init(const Options &opts, const Tree& tree, const PartitionedMSA&
   _brlen_max = opts.brlen_max;
   _brlen_opt_method = opts.brlen_opt_method;
   _brlen_smoothings = opts.brlen_smoothings;
+  _param_epsilon = opts.param_epsilon;
   _check_lh_impr = opts.safety_checks.isset(SafetyCheck::model_lh_impr);
   _partition_contributions.resize(parted_msa.part_count());
   double total_weight = 0;
@@ -243,7 +244,7 @@ double TreeInfo::optimize_branches(double lh_epsilon, double brlen_smooth_factor
                                                             RAXML_BRLEN_SCALER_MAX,
                                                             _brlen_min,
                                                             _brlen_max,
-                                                            RAXML_PARAM_EPSILON);
+                                                            _param_epsilon);
 
     LOG_DEBUG << "\t - after brlen scalers: logLH = " << new_loglh << endl;
 
@@ -270,7 +271,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                           PLLMOD_OPT_MIN_SUBST_RATE,
                                                           PLLMOD_OPT_MAX_SUBST_RATE,
                                                           RAXML_BFGS_FACTOR,
-                                                          RAXML_PARAM_EPSILON);
+                                                          _param_epsilon);
 
     LOG_DEBUG << "\t - after rates: logLH = " << new_loglh << endl;
 
@@ -287,7 +288,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                           PLLMOD_OPT_MIN_FREQ,
                                                           PLLMOD_OPT_MAX_FREQ,
                                                           RAXML_BFGS_FACTOR,
-                                                          RAXML_PARAM_EPSILON);
+                                                          _param_epsilon);
 
     LOG_DEBUG << "\t - after freqs: logLH = " << new_loglh << endl;
 
@@ -308,7 +309,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                          PLLMOD_OPT_MIN_PINV,
                                                          PLLMOD_OPT_MAX_PINV,
                                                          RAXML_BFGS_FACTOR,
-                                                         RAXML_PARAM_EPSILON);
+                                                         _param_epsilon);
 
     LOG_DEBUG << "\t - after a+i  : logLH = " << new_loglh << endl;
 
@@ -325,7 +326,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                         PLLMOD_OPT_PARAM_ALPHA,
                                                         PLLMOD_OPT_MIN_ALPHA,
                                                         PLLMOD_OPT_MAX_ALPHA,
-                                                        RAXML_PARAM_EPSILON);
+                                                        _param_epsilon);
 
      LOG_DEBUG << "\t - after alpha: logLH = " << new_loglh << endl;
 
@@ -341,7 +342,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                         PLLMOD_OPT_PARAM_PINV,
                                                         PLLMOD_OPT_MIN_PINV,
                                                         PLLMOD_OPT_MAX_PINV,
-                                                        RAXML_PARAM_EPSILON);
+                                                        _param_epsilon);
 
       LOG_DEBUG << "\t - after p-inv: logLH = " << new_loglh << endl;
 
@@ -360,7 +361,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                           _brlen_min,
                                                           _brlen_max,
                                                           RAXML_BFGS_FACTOR,
-                                                          RAXML_PARAM_EPSILON);
+                                                          _param_epsilon);
 
     LOG_DEBUG << "\t - after freeR: logLH = " << new_loglh << endl;
 //    LOG_DEBUG << "\t - after freeR/crosscheck: logLH = " << loglh() << endl;
