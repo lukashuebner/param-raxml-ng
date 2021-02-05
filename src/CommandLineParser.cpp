@@ -82,6 +82,7 @@ static struct option long_options[] =
   // Extended CLI-settable numerical parameters
   {"brlen-opt-radius",   required_argument, 0, 0},   /*  57 */
   {"spr-lheps",          required_argument, 0, 0},   /*  58 */
+  {"brlen-smoothings",   required_argument, 0, 0},   /*  59 */
 
   { 0, 0, 0, 0 }
 };
@@ -277,6 +278,7 @@ void CommandLineParser::parse_options(int argc, char** argv, Options &opts)
   opts.lh_epsilon = DEF_LH_EPSILON;
   opts.spr_lheps = DEF_SPR_LH_EPSILON;
   opts.brlen_opt_radius = DEF_BRLEN_OPT_RADIUS;
+  opts.brlen_smoothings = DEF_BRLEN_SMOOTHINGS;
 
   /* default: autodetect best SPR radius */
   opts.spr_radius = -1;
@@ -926,6 +928,16 @@ void CommandLineParser::parse_options(int argc, char** argv, Options &opts)
                                             ", please provide a positive real number.");
         }
         break;
+
+      case 59: /* branch length smoothings */
+        if(sscanf(optarg, "%u", &opts.brlen_smoothings) != 1 || opts.brlen_smoothings <= 0)
+        {
+          throw InvalidOptionValueException("Invalid branchlength smoothing settings: " +
+                                            string(optarg) +
+                                            ", please provide a positive integer number.");
+        }
+        break;
+
       default:
         throw  OptionException("Internal error in option parsing");
     }

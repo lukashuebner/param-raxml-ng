@@ -72,6 +72,7 @@ private:
   int _brlen_opt_method;
   double _brlen_min;
   double _brlen_max;
+  int _brlen_smoothings;
   bool _check_lh_impr;
   doubleVector _partition_contributions;
 

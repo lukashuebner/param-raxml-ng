@@ -28,6 +28,7 @@ void TreeInfo::init(const Options &opts, const Tree& tree, const PartitionedMSA&
   _brlen_min = opts.brlen_min;
   _brlen_max = opts.brlen_max;
   _brlen_opt_method = opts.brlen_opt_method;
+  _brlen_smoothings = opts.brlen_smoothings;
   _check_lh_impr = opts.safety_checks.isset(SafetyCheck::model_lh_impr);
   _partition_contributions.resize(parted_msa.part_count());
   double total_weight = 0;
@@ -217,7 +218,7 @@ double TreeInfo::optimize_branches(double lh_epsilon, double brlen_smooth_factor
 
   if (_pll_treeinfo->params_to_optimize[0] & PLLMOD_OPT_PARAM_BRANCHES_ITERATIVE)
   {
-    int max_iters = brlen_smooth_factor * RAXML_BRLEN_SMOOTHINGS;
+    int max_iters = brlen_smooth_factor * _brlen_smoothings;
     new_loglh = -1 * pllmod_algo_opt_brlen_treeinfo(_pll_treeinfo,
                                                     _brlen_min,
                                                     _brlen_max,
@@ -384,7 +385,7 @@ double TreeInfo::spr_round(spr_round_params& params)
 {
   double loglh = pllmod_algo_spr_round(_pll_treeinfo, params.radius_min, params.radius_max,
                                params.ntopol_keep, params.thorough, _brlen_opt_method,
-                               _brlen_min, _brlen_max, RAXML_BRLEN_SMOOTHINGS,
+                               _brlen_min, _brlen_max, _brlen_smoothings,
                                0.1,
                                params.subtree_cutoff > 0. ? &params.cutoff_info : nullptr,
                                params.subtree_cutoff,

@@ -83,6 +83,7 @@ public:
   unsigned int brlen_opt_radius;
   double brlen_min;
   double brlen_max;
+  int brlen_smoothings;
 
   unsigned int num_searches;
   unsigned long long terrace_maxsize;

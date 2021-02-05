@@ -423,6 +423,7 @@ std::ostream& operator<<(std::ostream& stream, const Options& opts)
 
     stream << "  radius of branch length optimizations during spr rounds: " << opts.brlen_opt_radius << endl;
     stream << "  lh-epsilon during spr rounds: " << opts.spr_lheps << endl;
+    stream << "  branch lengths smoothings: " << opts.brlen_smoothings << endl;
 
     stream << "  branch lengths: ";
     if (opts.brlen_linkage == PLLMOD_COMMON_BRLEN_SCALED)
