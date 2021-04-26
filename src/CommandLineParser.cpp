@@ -84,6 +84,7 @@ static struct option long_options[] =
   {"spr-lheps",          required_argument, 0, 0},   /*  58 */
   {"brlen-smoothings",   required_argument, 0, 0},   /*  59 */
   {"param-eps",          required_argument, 0, 0},   /*  60 */
+  {"bfgs-factor",        required_argument, 0, 0},   /*  61 */
 
   { 0, 0, 0, 0 }
 };
@@ -281,6 +282,7 @@ void CommandLineParser::parse_options(int argc, char** argv, Options &opts)
   opts.brlen_opt_radius = DEF_BRLEN_OPT_RADIUS;
   opts.brlen_smoothings = DEF_BRLEN_SMOOTHINGS;
   opts.param_epsilon = DEF_PARAM_EPSILON;
+  opts.bfgs_factor = DEF_BFGS_FACTOR;
 
   /* default: autodetect best SPR radius */
   opts.spr_radius = -1;
@@ -944,6 +946,15 @@ void CommandLineParser::parse_options(int argc, char** argv, Options &opts)
         if(sscanf(optarg, "%lf", &opts.param_epsilon) != 1 || opts.param_epsilon <= 0)
         {
           throw InvalidOptionValueException("Invalid parameter epsilon settings: " +
+                                            string(optarg) +
+                                            ", please provide a positive real number.");
+        }
+        break;
+    
+      case 61: /* BFGS factor */
+        if(sscanf(optarg, "%lf", &opts.bfgs_factor) != 1 || opts.bfgs_factor <= 0)
+        {
+          throw InvalidOptionValueException("Invalid BFGS factor settings: " +
                                             string(optarg) +
                                             ", please provide a positive real number.");
         }

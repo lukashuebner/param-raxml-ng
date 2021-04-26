@@ -30,6 +30,7 @@ void TreeInfo::init(const Options &opts, const Tree& tree, const PartitionedMSA&
   _brlen_opt_method = opts.brlen_opt_method;
   _brlen_smoothings = opts.brlen_smoothings;
   _param_epsilon = opts.param_epsilon;
+  _bfgs_factor = opts.bfgs_factor;
   _check_lh_impr = opts.safety_checks.isset(SafetyCheck::model_lh_impr);
   _partition_contributions.resize(parted_msa.part_count());
   double total_weight = 0;
@@ -270,7 +271,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                           0,
                                                           PLLMOD_OPT_MIN_SUBST_RATE,
                                                           PLLMOD_OPT_MAX_SUBST_RATE,
-                                                          RAXML_BFGS_FACTOR,
+                                                          _bfgs_factor,
                                                           _param_epsilon);
 
     LOG_DEBUG << "\t - after rates: logLH = " << new_loglh << endl;
@@ -287,7 +288,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                           0,
                                                           PLLMOD_OPT_MIN_FREQ,
                                                           PLLMOD_OPT_MAX_FREQ,
-                                                          RAXML_BFGS_FACTOR,
+                                                          _bfgs_factor,
                                                           _param_epsilon);
 
     LOG_DEBUG << "\t - after freqs: logLH = " << new_loglh << endl;
@@ -308,7 +309,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                          PLLMOD_OPT_MAX_ALPHA,
                                                          PLLMOD_OPT_MIN_PINV,
                                                          PLLMOD_OPT_MAX_PINV,
-                                                         RAXML_BFGS_FACTOR,
+                                                         _bfgs_factor,
                                                          _param_epsilon);
 
     LOG_DEBUG << "\t - after a+i  : logLH = " << new_loglh << endl;
@@ -360,7 +361,7 @@ double TreeInfo::optimize_params(int params_to_optimize, double lh_epsilon)
                                                           RAXML_FREERATE_MAX,
                                                           _brlen_min,
                                                           _brlen_max,
-                                                          RAXML_BFGS_FACTOR,
+                                                          _bfgs_factor,
                                                           _param_epsilon);
 
     LOG_DEBUG << "\t - after freeR: logLH = " << new_loglh << endl;

@@ -74,6 +74,7 @@ private:
   double _brlen_max;
   int _brlen_smoothings;
   double _param_epsilon;
+  double _bfgs_factor;
   bool _check_lh_impr;
   doubleVector _partition_contributions;
 

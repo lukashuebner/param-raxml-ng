@@ -425,6 +425,7 @@ std::ostream& operator<<(std::ostream& stream, const Options& opts)
     stream << "  lh-epsilon during spr rounds: " << opts.spr_lheps << endl;
     stream << "  branch lengths smoothings: " << opts.brlen_smoothings << endl;
     stream << "  parameter epsilon: " << opts.param_epsilon << endl;
+    stream << "  BFGS factor: " << opts.bfgs_factor << endl;
 
     stream << "  branch lengths: ";
     if (opts.brlen_linkage == PLLMOD_COMMON_BRLEN_SCALED)
